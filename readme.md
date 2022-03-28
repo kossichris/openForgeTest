@@ -29,8 +29,6 @@ A test Project for an Angular engineer
 
 ### Built With
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-
 - [Angular](https://angular.io/)
 - [Ionic](http://ionicframework.com/)
 - [Github API](https://developer.github.com/v3/users/)
