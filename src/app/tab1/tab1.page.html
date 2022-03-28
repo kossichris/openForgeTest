@@ -1,0 +1,11 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title> Feed </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div *ngFor="let user of  (users$|async); trackBy:user?.id ">
+    {{user?.login}}
+  </div>
+</ion-content>

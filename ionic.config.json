@@ -1,0 +1,7 @@
+{
+  "name": "openForge",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
