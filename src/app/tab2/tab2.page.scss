@@ -19,6 +19,11 @@ ion-avatar img {
 mat-card {
   background-color: #fff;
 }
+.empty--data {
+  text-align: center;
+  margin: 8em;
+  color: var(--ion-color-primary);
+}
 .user--info {
   line-height: 2px;
   text-align: center;

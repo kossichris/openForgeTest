@@ -37,58 +37,61 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <mat-card>
-    <ion-avatar slot="start">
-      <img [src]="(user$ | async).avatar_url" />
-    </ion-avatar>
-    <div class="user--info">
-      <h3>
-        <strong>{{(user$ | async).name}} </strong>
-      </h3>
-      <span>{{(user$ | async).login }}</span>
+  <div *ngIf="!(user$|async).id" class="empty--data">No user selected</div>
+  <ng-container *ngIf="(user$|async).id">
+    <mat-card *ngIf="user$ | async as user">
+      <ion-avatar slot="start">
+        <img [src]="user.avatar_url" />
+      </ion-avatar>
+      <div class="user--info">
+        <h3>
+          <strong>{{user?.name}} </strong>
+        </h3>
+        <span>{{user?.login }}</span>
 
-      <p>{{(user$ | async).bio }}</p>
+        <p>{{user?.bio }}</p>
 
-      <ng-container *ngIf="user$ | async as user">
-        <ion-button
-          *ngIf="user.blog"
-          (click)="openBlog(user.blog)"
-          shape="round"
-          >Website</ion-button
-        >
-      </ng-container>
-    </div>
-    <mat-divider></mat-divider>
+        <ng-container>
+          <ion-button
+            *ngIf="user.blog"
+            (click)="openBlog(user.blog)"
+            shape="round"
+            >Website</ion-button
+          >
+        </ng-container>
+      </div>
+      <mat-divider></mat-divider>
 
-    <div class="user--stats">
-      <h3>
-        <small>
-          <ion-icon name="location-outline"></ion-icon>
-        </small>
+      <div class="user--stats">
+        <h3>
+          <small>
+            <ion-icon name="location-outline"></ion-icon>
+          </small>
 
-        <strong> {{(user$ | async).location }} </strong>
-      </h3>
+          <strong> {{user?.location }} </strong>
+        </h3>
 
-      <h3>
-        <small>
-          <ion-icon name="home-outline"></ion-icon>
-        </small>
+        <h3>
+          <small>
+            <ion-icon name="home-outline"></ion-icon>
+          </small>
 
-        <strong> {{(user$ | async).company }} </strong>
-      </h3>
-    </div>
-    <mat-divider></mat-divider>
+          <strong> {{user?.company }} </strong>
+        </h3>
+      </div>
+      <mat-divider></mat-divider>
 
-    <div class="user--stats">
-      <h3>
-        <small>Public repos</small>
-        <strong> {{(user$ | async).public_repos }} </strong>
-      </h3>
+      <div class="user--stats">
+        <h3>
+          <small>Public repos</small>
+          <strong> {{user?.public_repos }} </strong>
+        </h3>
 
-      <h3>
-        <small>Followers</small>
-        <strong> {{(user$ | async).followers }} </strong>
-      </h3>
-    </div>
-  </mat-card>
+        <h3>
+          <small>Followers</small>
+          <strong> {{user?.followers }} </strong>
+        </h3>
+      </div>
+    </mat-card>
+  </ng-container>
 </ion-content>
