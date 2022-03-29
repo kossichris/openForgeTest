@@ -1,15 +1,90 @@
-<ion-header [translucent]="true">
+<ion-header class="ion-no-border" [translucent]="true">
   <ion-toolbar>
-    <ion-title> User/Search </ion-title>
+    <form class="example-form">
+      <mat-form-field class="example-full-width" appearance="outline">
+        <input
+          type="text"
+          placeholder="Search a specific user"
+          aria-label="Number"
+          name="search"
+          [(ngModel)]="search"
+          (ngModelChange)="searchUser($event)"
+          matInput
+          [matAutocomplete]="auto"
+        />
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <ng-container *ngIf="search?.length >= 2 ">
+            <mat-option
+              *ngFor="let user of (users$ | async)| filter:search; trackBy:user?.id "
+              [value]="user.login"
+            >
+              <span> {{user.login}}</span>
+            </mat-option>
+          </ng-container>
+        </mat-autocomplete>
+        <button
+          *ngIf="search"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="search=''"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </form>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <mat-card>
+    <ion-avatar slot="start">
+      <img [src]="'https://avatars.githubusercontent.com/u/5?v=4'" />
+    </ion-avatar>
+    <div class="user--info">
+      <h3>
+        <strong> Lemon Green </strong>
+      </h3>
+      <span>defkunt</span>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+      <p>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius rem
+        sapiente nihil architecto
+      </p>
+
+      <ion-button shape="round">Website</ion-button>
+    </div>
+    <mat-divider></mat-divider>
+
+    <div class="user--stats">
+      <h3>
+        <small>
+          <ion-icon name="location-outline"></ion-icon>
+        </small>
+
+        <strong> New-york </strong>
+      </h3>
+
+      <h3>
+        <small>
+          <ion-icon name="home-outline"></ion-icon>
+        </small>
+
+        <strong> Google </strong>
+      </h3>
+    </div>
+    <mat-divider></mat-divider>
+
+    <div class="user--stats">
+      <h3>
+        <small>Public repos</small>
+        <strong> 123 </strong>
+      </h3>
+
+      <h3>
+        <small>Followers</small>
+        <strong> 400 </strong>
+      </h3>
+    </div>
+  </mat-card>
 </ion-content>

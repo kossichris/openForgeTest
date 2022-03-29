@@ -1,11 +1,45 @@
-<ion-header [translucent]="true">
+<ion-header class="ion-no-border" [translucent]="true">
   <ion-toolbar>
-    <ion-title> Feed </ion-title>
+    <ion-title> Feed</ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <form method="post">
+      <input
+        type="text"
+        name="search"
+        [(ngModel)]="term"
+        class="textbox"
+        placeholder="Filter users"
+      />
+    </form>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div *ngFor="let user of  (users$|async); trackBy:user?.id ">
-    {{user?.login}}
-  </div>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list>
+    <ion-spinner *ngIf="loading$|async" name="dots"></ion-spinner>
+
+    <ion-card
+      *ngFor="let user of  (users$|async) | filter:term; trackBy:user?.id "
+    >
+      <ion-item (click)="goToSearch(user?.login)">
+        <ion-avatar slot="start">
+          <img [src]="user?.avatar_url" />
+        </ion-avatar>
+        <ion-label>
+          <h2>{{user?.login}}</h2>
+        </ion-label>
+      </ion-item>
+    </ion-card>
+  </ion-list>
+  <ion-infinite-scroll threshold="25%" (ionInfinite)="loadMoreUsers($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more users..."
+    >
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

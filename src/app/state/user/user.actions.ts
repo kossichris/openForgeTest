@@ -12,6 +12,7 @@ export const GET_USER_FAIL = '[USER] Get User Fail';
 //Get User List
 export class GetAllUsers implements Action {
   readonly type = GET_ALL_USERS;
+  constructor(public payload: string) {}
 }
 
 export class GetAllUsersSuccess implements Action {
@@ -27,7 +28,7 @@ export class GetAllUsersFail implements Action {
 //Get User
 export class GetUser implements Action {
   readonly type = GET_USER;
-  constructor(public payload: number) {}
+  constructor(public payload: string) {}
 }
 
 export class GetUserSuccess implements Action {

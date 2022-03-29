@@ -15,8 +15,8 @@ export class UsersEffects {
   getAllUsers$: Observable<Action> = createEffect(() => {
     return this.actions$.pipe(
       ofType(UserActions.GET_ALL_USERS),
-      switchMap(() =>
-        this.userService.getUsers().pipe(
+      switchMap((queryStrings) =>
+        this.userService.getUsers(queryStrings).pipe(
           map(
             (users: User[]) => new UserActions.GetAllUsersSuccess(users),
             catchError((err) => of(new UserActions.GetAllUsersFail(err)))
@@ -30,8 +30,8 @@ export class UsersEffects {
     return this.actions$.pipe(
       ofType(UserActions.GET_USER),
       map((action: UserActions.GetUser) => action.payload),
-      switchMap((id) =>
-        this.userService.getUser(id).pipe(
+      switchMap((login) =>
+        this.userService.getUser(login).pipe(
           map((user: User) => new UserActions.GetUserSuccess(user)),
           catchError((err) => of(new UserActions.GetAllUsersFail(err)))
         )

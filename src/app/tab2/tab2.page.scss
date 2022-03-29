@@ -1,0 +1,56 @@
+.example-full-width {
+  width: 95%;
+  display: block;
+  margin: 0 auto;
+}
+
+button {
+  border-radius: 32px;
+}
+ion-avatar {
+  width: 29%;
+  display: block;
+  margin: 0 auto;
+}
+
+ion-avatar img {
+  border: 4px solid var(--ion-color-primary);
+}
+mat-card {
+  background-color: #fff;
+}
+.user--info {
+  line-height: 2px;
+  text-align: center;
+  margin: 1em;
+}
+
+p {
+  line-height: 2em;
+  margin: 1.5em;
+}
+.user--info {
+  margin-bottom: 1em;
+}
+.user--info span {
+  color: gray;
+}
+
+.user--stats {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 2.5em;
+}
+
+.user--stats h3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user--stats h3 small {
+  color: var(--ion-color-primary);
+}
+small ion-icon {
+  font-size: 2em;
+}

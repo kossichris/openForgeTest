@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/state/user/user.interface';
@@ -8,14 +8,15 @@ import { baseUrl } from '../Api';
   providedIn: 'root',
 })
 export class UserService {
-  private usersUrl = 'users';
   constructor(private httpClient: HttpClient) {}
 
-  getUsers(): Observable<Array<User>> {
-    return this.httpClient.get<User[]>(baseUrl + this.usersUrl);
+  getUsers(pagination): Observable<Array<User>> {
+    let usersUrl = 'users';
+    return this.httpClient.get<User[]>(baseUrl + usersUrl + pagination.payload);
   }
 
-  getUser(id: number): Observable<User> {
-    return;
+  getUser(login: string): Observable<User> {
+    let usersUrl = 'users/';
+    return this.httpClient.get<User>(baseUrl + usersUrl + login);
   }
 }

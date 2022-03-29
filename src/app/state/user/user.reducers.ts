@@ -18,6 +18,9 @@ export const initialState: State = {
     company: '',
     location: '',
     blog: '',
+    public_repos: 0,
+    followers: 0,
+    following: 0,
   },
   users: [],
   loading: false,
@@ -60,9 +63,11 @@ export function UserReducer(
     }
 
     case fromUser.GET_USER_SUCCESS: {
+      console.log(action.payload);
       return {
         ...state,
         loading: false,
+        user: action.payload,
       };
     }
 
@@ -82,3 +87,7 @@ export function UserReducer(
 export const getAllUsers = (state: State) => state.users;
 export const getLoading = (state: State) => state.loading;
 export const getError = (state: State) => state.error;
+
+export const getUser = (state: State) => state.user;
+export const getUserLoading = (state: State) => state.loading;
+export const getUserError = (state: State) => state.error;
