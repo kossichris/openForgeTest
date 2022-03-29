@@ -39,20 +39,24 @@
 <ion-content [fullscreen]="true">
   <mat-card>
     <ion-avatar slot="start">
-      <img [src]="'https://avatars.githubusercontent.com/u/5?v=4'" />
+      <img [src]="(user$ | async).avatar_url" />
     </ion-avatar>
     <div class="user--info">
       <h3>
-        <strong> Lemon Green </strong>
+        <strong>{{(user$ | async).name}} </strong>
       </h3>
-      <span>defkunt</span>
+      <span>{{(user$ | async).login }}</span>
 
-      <p>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius rem
-        sapiente nihil architecto
-      </p>
+      <p>{{(user$ | async).bio }}</p>
 
-      <ion-button shape="round">Website</ion-button>
+      <ng-container *ngIf="user$ | async as user">
+        <ion-button
+          *ngIf="user.blog"
+          (click)="openBlog(user.blog)"
+          shape="round"
+          >Website</ion-button
+        >
+      </ng-container>
     </div>
     <mat-divider></mat-divider>
 
@@ -62,7 +66,7 @@
           <ion-icon name="location-outline"></ion-icon>
         </small>
 
-        <strong> New-york </strong>
+        <strong> {{(user$ | async).location }} </strong>
       </h3>
 
       <h3>
@@ -70,7 +74,7 @@
           <ion-icon name="home-outline"></ion-icon>
         </small>
 
-        <strong> Google </strong>
+        <strong> {{(user$ | async).company }} </strong>
       </h3>
     </div>
     <mat-divider></mat-divider>
@@ -78,12 +82,12 @@
     <div class="user--stats">
       <h3>
         <small>Public repos</small>
-        <strong> 123 </strong>
+        <strong> {{(user$ | async).public_repos }} </strong>
       </h3>
 
       <h3>
         <small>Followers</small>
-        <strong> 400 </strong>
+        <strong> {{(user$ | async).followers }} </strong>
       </h3>
     </div>
   </mat-card>

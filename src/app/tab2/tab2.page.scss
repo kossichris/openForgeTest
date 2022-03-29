@@ -14,7 +14,7 @@ ion-avatar {
 }
 
 ion-avatar img {
-  border: 4px solid var(--ion-color-primary);
+  border: 2px solid var(--ion-color-primary);
 }
 mat-card {
   background-color: #fff;
@@ -46,11 +46,13 @@ p {
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex: 1;
 }
 
 .user--stats h3 small {
   color: var(--ion-color-primary);
 }
+
 small ion-icon {
   font-size: 2em;
 }

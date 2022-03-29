@@ -15,8 +15,8 @@ export class UsersEffects {
   getAllUsers$: Observable<Action> = createEffect(() => {
     return this.actions$.pipe(
       ofType(UserActions.GET_ALL_USERS),
-      switchMap((queryStrings) =>
-        this.userService.getUsers(queryStrings).pipe(
+      switchMap((pagination) =>
+        this.userService.getUsers(pagination).pipe(
           map(
             (users: User[]) => new UserActions.GetAllUsersSuccess(users),
             catchError((err) => of(new UserActions.GetAllUsersFail(err)))

@@ -63,7 +63,6 @@ export function UserReducer(
     }
 
     case fromUser.GET_USER_SUCCESS: {
-      console.log(action.payload);
       return {
         ...state,
         loading: false,

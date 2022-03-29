@@ -6,6 +6,7 @@ import { User } from '../state/user/user.interface';
 import * as fromStore from '../state/app.reducer';
 import { getAllUsers, getAUser } from '../state/user';
 import * as fromUser from '../state/user/user.actions';
+import { Browser } from '@capacitor/browser';
 
 @Component({
   selector: 'app-tab2',
@@ -13,13 +14,11 @@ import * as fromUser from '../state/user/user.actions';
   styleUrls: ['tab2.page.scss'],
 })
 export class Tab2Page {
-  options: string[] = ['One', 'Two', 'Three'];
   users$: Observable<Array<User>>;
   user$: Observable<User>;
   search: string = '';
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private store: Store<fromStore.AppState>
   ) {
     this.search = this.route.snapshot.paramMap.get('user');
@@ -34,13 +33,17 @@ export class Tab2Page {
     }
   }
 
+  openBlog = async (blog) => {
+    console.log(blog);
+    await Browser.open({ url: blog });
+  };
+
   getUsers() {
-    let pagination = `?since=1&per_page=100}`;
+    let pagination = `?since=1&per_page=100`;
     this.store.dispatch(new fromUser.GetAllUsers(pagination));
   }
 
   searchUser(userLogin) {
     this.store.dispatch(new fromUser.GetUser(userLogin));
-    console.log(this.user$);
   }
 }
